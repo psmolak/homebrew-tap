@@ -1,9 +1,10 @@
 class Bin < Formula
-  desc "Paweł Smolak's personal scripts"
+  desc "Personal scripts"
   homepage "https://github.com/psmolak/bin"
-  url "https://github.com/psmolak/bin/archive/refs/tags/v0.2.1.tar.gz"
-  sha256 "84977be584527eea3e63b49c9f1f6f15653c0a954b0fd15a5308d8866d8305c7"
+  url "https://github.com/psmolak/bin.git", tag: "v0.2.2", revision: "929054bb5b97deb263e4f26096226a0375ec6747"
   license "MIT"
+
+  head "https://github.com/psmolak/bin.git", branch: "master"
 
   def install
     bin.install "git-local-id"

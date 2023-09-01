@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+die() {
+  echo "$@" >&2
+  exit 1
+}
+
+depends() {
+  for cmd in "$@"
+  do
+    command -v "${cmd}" >/dev/null 2>&1 || die "Missing dependency: ${cmd}"
+  done
+}
+
+get-repo-latest-release() {
+  local repo="${1}"
+  curl "https://api.github.com/repos/${repo}/releases/latest" -s | jq .name -r
+}
+
+get-formula-current-version() {
+  local formula="${1}"
+  brew info --json "${formula}" | jq -r '.[0].versions.stable'
+}
+
+bump-formula-to-latest-release() {
+  local formula="${1}"
+  local repo="${2}"
+
+  local current
+  current="v$(get-formula-current-version "${formula}")"
+
+  local latest
+  latest="$(get-repo-latest-release "${repo}")"
+
+  if [ "${current}" == "${latest}" ]
+  then
+    echo "Formula '${formula}' is already at latest version: ${latest}, skipping."
+  else
+    echo "Bumping '${formula}' (${current} ~> ${latest})"
+    brew bump-formula-pr --no-audit --no-fork --write-only --commit --tag "${latest}" "${formula}"
+  fi
+}
+
+usage() {
+  echo "Usage: bump-to-latest [-h|--help] [all | <formula> <repo>]"
+}
+
+bump-all-to-latest() {
+  bump-formula-to-latest-release "psmolak/tap/bin" "psmolak/bin"
+}
+
+main() {
+  depends curl jq brew
+
+  if [ "${1:-}" == "--help" ] || [ "${1:-}" == "-h" ] 
+  then
+    usage && exit 0
+  fi
+
+  if [ "${1:-}" == "all" ]
+  then
+    bump-all-to-latest && exit 0
+  fi
+
+  local formula="${1:-}"
+  local repo="${2:-}"
+
+  if [ -z "${formula}" ] || [ -z "${repo}" ]
+  then
+    die "$(usage)"
+  fi
+
+  bump-formula-to-latest-release "${formula}" "${repo}"
+}
+
+main "$@"
