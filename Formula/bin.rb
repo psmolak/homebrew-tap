@@ -1,7 +1,7 @@
 class Bin < Formula
   desc "Personal scripts"
   homepage "https://github.com/psmolak/bin"
-  url "https://github.com/psmolak/bin.git", tag: "v0.2.1", revision: "bca3510b7a6f24b44516d4a168fbb3f0e8a0a6ba"
+  url "https://github.com/psmolak/bin.git", tag: "v0.2.2", revision: "929054bb5b97deb263e4f26096226a0375ec6747"
   license "MIT"
 
   head "https://github.com/psmolak/bin.git", branch: "master"
