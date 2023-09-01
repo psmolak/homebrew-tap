@@ -10,6 +10,6 @@ class Bin < Formula
   end
 
   test do
-    system "which", "${bin}/git-local-id"
+    system "which", "#{bin}/git-local-id"
   end
 end
