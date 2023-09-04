@@ -7,7 +7,7 @@ class Bin < Formula
   head "https://github.com/psmolak/bin.git", branch: "master"
 
   def install
-    bin.install "git-local-id"
+    bin.install Dir["src/*"]
   end
 
   test do
