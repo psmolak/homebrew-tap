@@ -1,7 +1,7 @@
 class Supersonic < Formula
   desc "Little wrapper around Cisco AnyConnect VPN client"
   homepage "https://github.com/psmolak/supersonic"
-  url "https://github.com/psmolak/supersonic.git", tag: "v0.1.1", revision: "77316853ebfb01cd1d83f4ddd25cef21e4303a0e"
+  url "https://github.com/psmolak/supersonic.git", tag: "v0.1.2", revision: "4aff136853324d4c6fd1ed7321778e3ee606d37e"
   license "MIT"
 
   head "https://github.com/psmolak/supersonic.git", branch: "main"
