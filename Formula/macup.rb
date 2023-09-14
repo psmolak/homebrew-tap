@@ -1,7 +1,7 @@
 class Macup < Formula
   desc "Setup scripts for new MacOS machine"
   homepage "https://github.com/psmolak/macup"
-  url "https://github.com/psmolak/macup.git", tag: "v0.1.0", revision: "c7598299628975121283976a157ad6a40e3a0abe"
+  url "https://github.com/psmolak/macup.git", tag: "v0.2.0", revision: "0d0b8f78c3271788d4d27a540c7bfa23d5df5e92"
   license "MIT"
 
   head "https://github.com/psmolak/macup.git", branch: "main"
